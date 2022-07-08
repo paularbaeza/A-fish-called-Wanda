@@ -26,22 +26,22 @@ gameOver = () =>{
       this.sharksArr.length === 0 ||
       this.sharksArr[this.sharksArr.length - 1].x < canvas.width / 2
     ) {
-      let randomPositionShark = Math.random() * (canvas.height - 160);
+      let randomPositionShark = Math.random() * (canvas.height - 140);
       let newEnemyShark = new Enemy(
         randomPositionShark,
         "./images/shark.png",
-        160
+        140
       );
       this.sharksArr.push(newEnemyShark);
     } else if (
       this.whalesArr.length === 0 ||
       this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 2
     ) {
-      let randomPositionWhale = Math.random() * (canvas.height - 160);
+      let randomPositionWhale = Math.random() * (canvas.height - 200);
       let newEnemyWhale = new Enemy(
         randomPositionWhale,
         "./images/whale.png",
-        220
+        200
       );
       this.whalesArr.push(newEnemyWhale);
       //setTimeout(whalesArr,600);
@@ -78,6 +78,17 @@ gameOver = () =>{
     })
   }
 
+  wandaFoodCollision = () => {
+    this.foodArr.forEach ((eachFood)=>{
+      if(eachFood.x < this.wanda.x + this.wanda.w &&
+        eachFood.x + eachFood.w > this.wanda.x &&
+        eachFood.y < this.wanda.y + this.wanda.h &&
+        eachFood.h + eachFood.y > this.wanda.y){
+        this.foodArr.shift()
+        }
+    })
+  }
+
   gameLoop = () => {
     //console.log("juego andando")
     //1. limpiar el canvas
@@ -96,6 +107,7 @@ gameOver = () =>{
     this.wanda.moveWanda();
     this.addFood();
     this.wandaEnemyCollision()
+    this.wandaFoodCollision()
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
     this.wanda.drawWanda();
