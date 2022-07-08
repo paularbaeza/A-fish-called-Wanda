@@ -1,13 +1,13 @@
 class Enemy {
-    constructor(/*yParam*/) {
+    constructor(yParam, srcParam, hParam) {
         //aqui todas las propiedades de los enemigos
         this.image = new Image();
-        this.image.src = "./images/shark.png";
+        this.image.src = srcParam;
         this.x = canvas.width; //eje x
-        this.y = 200;
+        this.y = yParam;
         this.w = 350; 
-        this.h = 160; 
-        this.speed = 2;
+        this.h = hParam; 
+        this.speed = 3;
       }
 
     //aqui todos los metodos de los enemigos
