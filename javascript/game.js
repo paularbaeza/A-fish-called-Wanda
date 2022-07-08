@@ -9,11 +9,18 @@ class Game {
     this.wanda = new Wanda();
     this.sharksArr = [];
     this.whalesArr = [];
+    this.foodArr = [];
     //this.enemy = new Enemy ();
     this.isGameOn = true;
   }
 
   // todos los métodos del juego
+gameOver = () =>{
+  this.isGameOn = false
+  canvas.style.display = "none";
+  gameOverDOM.style.display = "flex";
+}
+
   addEnemy = () => {
     if (
       this.sharksArr.length === 0 ||
@@ -41,6 +48,36 @@ class Game {
     }
   };
 
+  addFood = () => {
+    if (this.foodArr.length === 0) {
+      let randomPositionYFood = Math.random() * (canvas.height - 70);
+      let randomPositionXFood = Math.random() * (canvas.width - 70);
+      let food = new Food(randomPositionXFood, randomPositionYFood);
+      this.foodArr.push(food);
+    }
+  };
+
+  wandaEnemyCollision = () => {
+    this.sharksArr.forEach ((eachShark) => {
+      if(
+        eachShark.x < this.wanda.x + this.wanda.w &&
+        eachShark.x + eachShark.w > this.wanda.x &&
+        eachShark.y < this.wanda.y + this.wanda.h &&
+        eachShark.h + eachShark.y > this.wanda.y 
+      ){
+        this.gameOver ()
+      }
+    })
+    this.whalesArr.forEach((eachWhale)=> {
+      if(eachWhale.x < this.wanda.x + this.wanda.w &&
+        eachWhale.x + eachWhale.w > this.wanda.x &&
+        eachWhale.y < this.wanda.y + this.wanda.h &&
+        eachWhale.h + eachWhale.y > this.wanda.y){
+          this.gameOver ()
+        }
+    })
+  }
+
   gameLoop = () => {
     //console.log("juego andando")
     //1. limpiar el canvas
@@ -57,7 +94,8 @@ class Game {
       eachWhale.enemyMovement();
     });
     this.wanda.moveWanda();
-
+    this.addFood();
+    this.wandaEnemyCollision()
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
     this.wanda.drawWanda();
@@ -66,6 +104,9 @@ class Game {
     });
     this.whalesArr.forEach((eachWhale) => {
       eachWhale.drawEnemy();
+    });
+    this.foodArr.forEach((eachFood) => {
+      eachFood.drawFood();
     });
 
     //4. efecto de recursión

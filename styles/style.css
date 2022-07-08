@@ -9,14 +9,23 @@ body {
   background-color: lightblue;
 }
 
-#start-btn,
-#restart-btn {
+#start-btn{
   background-color: #e1a524;
   font-family: Rammetto One;
   color: white;
   padding: 20px;
   font-size: 60px;
   margin-top: -330px;
+  border-radius: 10px;
+}
+
+#restart-btn {
+  background-color: #e1a524;
+  font-family: Rammetto One;
+  color: white;
+  padding: 20px;
+  font-size: 60px;
+  margin-top: 30px;
   border-radius: 10px;
 }
 

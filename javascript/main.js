@@ -7,6 +7,7 @@ const ctx = canvas.getContext("2d");
 const splashScreenDOM = document.querySelector("#splash-screen");
 const startBtnDOM = document.querySelector("#start-btn");
 const gameOverDOM = document.querySelector ("#gameover-screen")
+const restartBtnDOM =document.querySelector ("#restart-btn")
 
 let game;
 
@@ -28,7 +29,7 @@ const startGame = () => {
 
 // * ADD EVENT LISTENERS
 startBtnDOM.addEventListener("click", startGame);
-
+restartBtnDOM.addEventListener("click", startGame)
 
 //adeventlistener para movimiento de Wanda
 window.addEventListener("keydown", (event) => {
