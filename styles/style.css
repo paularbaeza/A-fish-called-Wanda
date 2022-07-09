@@ -29,6 +29,16 @@ body {
   border-radius: 10px;
 }
 
+#score {
+  background-color: white;
+  font-family: Rammetto One;
+  color: #e1a524;
+  padding: 10px;
+  font-size: 30px;
+  margin-top: 0;
+  border-radius: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: column;

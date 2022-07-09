@@ -10,6 +10,7 @@ class Game {
     this.sharksArr = [];
     this.whalesArr = [];
     this.foodArr = [];
+  
     //this.enemy = new Enemy ();
     this.isGameOn = true;
   }
@@ -26,22 +27,22 @@ gameOver = () =>{
       this.sharksArr.length === 0 ||
       this.sharksArr[this.sharksArr.length - 1].x < canvas.width / 2
     ) {
-      let randomPositionShark = Math.random() * (canvas.height - 140);
+      let randomPositionShark = Math.random() * (canvas.height - 120);
       let newEnemyShark = new Enemy(
         randomPositionShark,
         "./images/shark.png",
-        140
+        120
       );
       this.sharksArr.push(newEnemyShark);
     } else if (
-      this.whalesArr.length === 0 ||
-      this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 2
+      (this.whalesArr.length === 0 ||
+      this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 2) && scoreDOM.innerText >=60
     ) {
-      let randomPositionWhale = Math.random() * (canvas.height - 200);
+      let randomPositionWhale = Math.random() * (canvas.height - 170);
       let newEnemyWhale = new Enemy(
         randomPositionWhale,
         "./images/whale.png",
-        200
+        170
       );
       this.whalesArr.push(newEnemyWhale);
       //setTimeout(whalesArr,600);
@@ -63,7 +64,7 @@ gameOver = () =>{
         eachShark.x < this.wanda.x + this.wanda.w &&
         eachShark.x + eachShark.w > this.wanda.x &&
         eachShark.y < this.wanda.y + this.wanda.h &&
-        eachShark.h + eachShark.y > this.wanda.y 
+        eachShark.h/2 + eachShark.y > this.wanda.y 
       ){
         this.gameOver ()
       }
@@ -72,7 +73,7 @@ gameOver = () =>{
       if(eachWhale.x < this.wanda.x + this.wanda.w &&
         eachWhale.x + eachWhale.w > this.wanda.x &&
         eachWhale.y < this.wanda.y + this.wanda.h &&
-        eachWhale.h + eachWhale.y > this.wanda.y){
+        eachWhale.h/2 + eachWhale.y > this.wanda.y){
           this.gameOver ()
         }
     })
@@ -85,6 +86,7 @@ gameOver = () =>{
         eachFood.y < this.wanda.y + this.wanda.h &&
         eachFood.h + eachFood.y > this.wanda.y){
         this.foodArr.shift()
+         scoreDOM.innerText = Number (scoreDOM.innerText)+10
         }
     })
   }

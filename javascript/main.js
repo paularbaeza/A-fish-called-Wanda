@@ -8,6 +8,7 @@ const splashScreenDOM = document.querySelector("#splash-screen");
 const startBtnDOM = document.querySelector("#start-btn");
 const gameOverDOM = document.querySelector ("#gameover-screen")
 const restartBtnDOM =document.querySelector ("#restart-btn")
+const scoreDOM = document.querySelector("#score span")
 
 let game;
 
@@ -18,7 +19,7 @@ const startGame = () => {
     splashScreenDOM.style.display = "none";
     gameOverDOM.style.display ="none"
     canvas.style.display = "block";
-  
+    scoreDOM.innerText = 0
     //...aquí empezaría el juego.
     game = new Game();
     console.log(game);

@@ -5,7 +5,7 @@ class Enemy {
         this.image.src = srcParam;
         this.x = canvas.width; //eje x
         this.y = yParam;
-        this.w = 300; 
+        this.w = 250; 
         this.h = hParam; 
         this.speed = 3;
       }
