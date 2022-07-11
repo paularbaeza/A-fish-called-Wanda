@@ -8,7 +8,7 @@ class Game {
     this.isGameOn = true;
     this.wanda = new Wanda();
     this.sharksArr = [];
-    this.whalesArr = [];
+    this.dolphinsArr = [];
     this.medusaArr = [];
     this.foodArr = [];
     this.canCollide = true;
@@ -48,29 +48,29 @@ class Game {
       );
       this.sharksArr.push(newEnemyShark);
     } else if (
-      (this.whalesArr.length === 0 ||
-        this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 3) &&
-      scoreDOM.innerText >= 80
+      (this.dolphinsArr.length === 0 ||
+        this.dolphinsArr[this.dolphinsArr.length - 1].x < canvas.width /4) &&
+      scoreDOM.innerText >=80
     ) {
-      let randomPositionWhale = Math.random() * (canvas.height - 130);
-      let newEnemyWhale = new Enemy(
-        randomPositionWhale,
-        "./images/whale2.png",
-        130,
-        250
+      let randomPositionDolphin = Math.random() * (canvas.height - 300);
+      let newEnemyDolphin = new Enemy(
+        randomPositionDolphin,
+        "./images/dolphin.png",
+        190,
+        300
       );
-      this.whalesArr.push(newEnemyWhale);
+      this.dolphinsArr.push(newEnemyDolphin);
     } else if (
       (this.medusaArr.length === 0 ||
-        this.medusaArr[this.medusaArr.length - 1].x < canvas.width / 2) &&
+        this.medusaArr[this.medusaArr.length - 1].x < canvas.width *0.4) &&
       scoreDOM.innerText >= 40
     ) {
-      let randomPositionMedusa = Math.random() * (canvas.height - 150);
+      let randomPositionMedusa = Math.random() * (canvas.height - 120);
       let newEnemyMedusa = new Enemy(
         randomPositionMedusa,
         "./images/medusa.png",
-        150,
-        120
+        130,
+        90
       );
       this.medusaArr.push(newEnemyMedusa);
     }
@@ -79,8 +79,8 @@ class Game {
   cleanEnemyArr = () => {
     if (this.sharksArr[0].x + this.sharksArr[0].w < 0 ){
       this.sharksArr.shift()
-    }else if (this.whalesArr[0].x + this.whalesArr[0].w < 0 ){
-      this.whalesArr.shift()
+    }else if (this.dolphinsArr[0].x + this.dolphinsArr[0].w < 0 ){
+      this.dolphinsArr.shift()
     }else if (this.medusaArr[0].x + this.medusaArr[0].w < 0 ){
       this.medusaArr.shift()
     }
@@ -126,17 +126,19 @@ class Game {
       }
 
     });
-    this.whalesArr.forEach((eachWhale) => {
+    this.dolphinsArr.forEach((eachDolphin) => {
       if (
-        eachWhale.x < this.wanda.x + this.wanda.w &&
-        eachWhale.x + eachWhale.w > this.wanda.x &&
-        eachWhale.y < this.wanda.y + this.wanda.h &&
-        eachWhale.h / 2 + eachWhale.y > this.wanda.y 
+        eachDolphin.x < this.wanda.x + this.wanda.w &&
+        eachDolphin.x + eachDolphin.w > this.wanda.x &&
+        eachDolphin.y < this.wanda.y + this.wanda.h &&
+        eachDolphin.h / 2 + eachDolphin.y > this.wanda.y 
         && this.wanda.canCollide === true
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
+        this.showFlash =true;
         this.wanda.faceSickWanda();
+        setTimeout(this.flashOut, 1000)
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText==="0"){
           this.gameOver()
@@ -144,10 +146,10 @@ class Game {
       }
 
       if (
-        eachWhale.x < this.wanda.x + this.wanda.w &&
-        eachWhale.x + eachWhale.w > this.wanda.x &&
-        eachWhale.y < this.wanda.y + this.wanda.h &&
-        eachWhale.h / 2 + eachWhale.y > this.wanda.y &&
+        eachDolphin.x < this.wanda.x + this.wanda.w &&
+        eachDolphin.x + eachDolphin.w > this.wanda.x &&
+        eachDolphin.y < this.wanda.y + this.wanda.h &&
+        eachDolphin.h / 2 + eachDolphin.y > this.wanda.y &&
         this.wanda.canCollide === false
       ) {
         lifesDOM.innerText = lifesDOM.innerText;
@@ -164,7 +166,9 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
+        this.showFlash =true;
         this.wanda.faceSickWanda();
+        setTimeout(this.flashOut, 1000)
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText==="0"){
           this.gameOver()
@@ -208,8 +212,8 @@ class Game {
     this.sharksArr.forEach((eachShark) => {
       eachShark.enemyMovement();
     });
-    this.whalesArr.forEach((eachWhale) => {
-      eachWhale.enemyMovement();
+    this.dolphinsArr.forEach((eachDolphin) => {
+      eachDolphin.enemyMovement();
     });
     this.medusaArr.forEach((eachMedusa) => {
       eachMedusa.enemyMovement();
@@ -226,8 +230,8 @@ class Game {
     this.sharksArr.forEach((eachShark) => {
       eachShark.drawEnemy();
     });
-    this.whalesArr.forEach((eachWhale) => {
-      eachWhale.drawEnemy();
+    this.dolphinsArr.forEach((eachDolphin) => {
+      eachDolphin.drawEnemy();
     });
     this.medusaArr.forEach((eachMedusa) => {
       eachMedusa.drawEnemy();

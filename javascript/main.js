@@ -23,9 +23,26 @@ const startGame = () => {
     gameOverDOM.style.display ="none"
     canvas.style.display = "block";
     punctuationDOM.style.display="flex"
+    lifesBoxDOM.style.display ="flex"
 
     scoreDOM.innerText = 0
     //...aquí empezaría el juego.
+    game = new Game();
+    console.log(game);
+    game.gameLoop();
+  };
+  
+  const reStartGame = () => {
+    console.log("inicia el juego");
+    splashScreenDOM.style.display = "none";
+    gameOverDOM.style.display ="none"
+    canvas.style.display = "block";
+    punctuationDOM.style.display="flex"
+    lifesBoxDOM.style.display ="flex"
+    lifesDOM.innerText = 3
+    scoreDOM.innerText = 0
+
+    //...aquí volvería a empezar el juego.
     game = new Game();
     console.log(game);
     game.gameLoop();
@@ -35,7 +52,7 @@ const startGame = () => {
 
 // * ADD EVENT LISTENERS
 startBtnDOM.addEventListener("click", startGame);
-restartBtnDOM.addEventListener("click", startGame)
+restartBtnDOM.addEventListener("click", reStartGame)
 
 //adeventlistener para movimiento de Wanda
 window.addEventListener("keydown", (event) => {

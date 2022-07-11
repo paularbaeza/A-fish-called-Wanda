@@ -5,8 +5,8 @@ class Wanda {
     this.image.src = "./images/wanda-happy-right.png";
     this.x = 0; //eje x
     this.y = 0; //eje y
-    this.w = 150;
-    this.h = 100;
+    this.w = 120;
+    this.h = 80;
     this.speed = 3;
     this.directionX = 1;
     this.directionY = 1;
