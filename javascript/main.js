@@ -11,6 +11,7 @@ const restartBtnDOM =document.querySelector ("#restart-btn")
 const scoreDOM = document.querySelector("#score span")
 const lifesDOM =document.querySelector ("#lifes span")
 const punctuationDOM = document.querySelector("#punctuation")
+const lifesBoxDOM = document.querySelector ("#lifes")
 
 let game;
 

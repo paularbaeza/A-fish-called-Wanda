@@ -40,7 +40,6 @@ class Wanda {
     }
   };
 
-
   wandaCanvasCollision = () => {
     if (this.y >= canvas.height- this.h) { //suelo
       this.y = canvas.height- this.h;
@@ -52,4 +51,5 @@ class Wanda {
       this.x = 0;
     }
   };
+
 }

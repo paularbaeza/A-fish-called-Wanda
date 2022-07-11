@@ -13,14 +13,26 @@ class Game {
     this.foodArr = [];
     this.canCollide = true;
     this.isGameOn = true;
+    this.showFlash = false;
   }
 
   // todos los métodos del juego
+
   gameOver = () => {
     this.isGameOn = false;
     canvas.style.display = "none";
+    lifesBoxDOM.style.display ="none";
     gameOverDOM.style.display = "flex";
   };
+
+  drawFlash = () => {
+    ctx.fillStyle = "rgba(251, 0, 0, 0.3)";
+    ctx.fillRect (0,0,canvas.width,canvas.height)
+  }
+
+  flashOut =() => {
+    this.showFlash=false
+  }
 
   addEnemy = () => {
     if (
@@ -38,7 +50,7 @@ class Game {
     } else if (
       (this.whalesArr.length === 0 ||
         this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 3) &&
-      scoreDOM.innerText >= 40
+      scoreDOM.innerText >= 80
     ) {
       let randomPositionWhale = Math.random() * (canvas.height - 130);
       let newEnemyWhale = new Enemy(
@@ -51,7 +63,7 @@ class Game {
     } else if (
       (this.medusaArr.length === 0 ||
         this.medusaArr[this.medusaArr.length - 1].x < canvas.width / 2) &&
-      scoreDOM.innerText >= 30
+      scoreDOM.innerText >= 40
     ) {
       let randomPositionMedusa = Math.random() * (canvas.height - 150);
       let newEnemyMedusa = new Enemy(
@@ -64,6 +76,16 @@ class Game {
     }
   };
 
+  cleanEnemyArr = () => {
+    if (this.sharksArr[0].x + this.sharksArr[0].w < 0 ){
+      this.sharksArr.shift()
+    }else if (this.whalesArr[0].x + this.whalesArr[0].w < 0 ){
+      this.whalesArr.shift()
+    }else if (this.medusaArr[0].x + this.medusaArr[0].w < 0 ){
+      this.medusaArr.shift()
+    }
+  }
+
   addFood = () => {
     if (this.foodArr.length === 0) {
       let randomPositionYFood = Math.random() * (canvas.height - 70);
@@ -72,7 +94,7 @@ class Game {
       this.foodArr.push(food);
     }
   };
-
+ 
   wandaEnemyCollision = () => {
     this.sharksArr.forEach((eachShark) => {
       if (
@@ -84,7 +106,9 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
+        this.showFlash =true;
         this.wanda.faceSickWanda();
+        setTimeout(this.flashOut, 1000)
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText==="0"){
           this.gameOver()
@@ -174,14 +198,13 @@ class Game {
   };
 
   gameLoop = () => {
-    //console.log("juego andando")
     //1. limpiar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //2. movimientos y acciones de los elementos
 
     this.addEnemy();
-
+    //this.cleanEnemyArr()
     this.sharksArr.forEach((eachShark) => {
       eachShark.enemyMovement();
     });
@@ -212,6 +235,10 @@ class Game {
     this.foodArr.forEach((eachFood) => {
       eachFood.drawFood();
     });
+    if (this.showFlash===true){
+      this.drawFlash()
+    }
+
 
     //4. efecto de recursión
     if (this.isGameOn === true) {
