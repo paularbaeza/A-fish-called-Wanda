@@ -10,6 +10,7 @@ class Wanda {
     this.speed = 3;
     this.directionX = 1;
     this.directionY = 1;
+    this.canCollide = true;
   }
 
   //aqui los métodos de Wanda
@@ -30,8 +31,17 @@ class Wanda {
     }
   }
 
+  afterWandaLoseLife = () => {
+    this.canCollide = true;
+    if (this.directionX === 1) {
+      this.image.src = "./images/wanda-happy-right.png";
+    } else if (this.directionX === -1) {
+      this.image.src = "./images/wanda-happy-left.png";
+    }
+  };
+
+
   wandaCanvasCollision = () => {
-    console.log(this.x)
     if (this.y >= canvas.height- this.h) { //suelo
       this.y = canvas.height- this.h;
     } else if (this.y <= 0) {//arriba
@@ -39,7 +49,6 @@ class Wanda {
     if (this.x + this.w >= canvas.width) { //derecha
       this.x = canvas.width - this.w;
     } else if (this.x <= 0) { //izquierda
-      console.log("collision izq")
       this.x = 0;
     }
   };
