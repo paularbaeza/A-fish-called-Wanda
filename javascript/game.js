@@ -108,7 +108,9 @@ class Game {
         this.wanda.canCollide = false;
         this.showFlash =true;
         this.wanda.faceSickWanda();
-        setTimeout(this.flashOut, 1000)
+        this.wanda.directionX=0
+        this.wanda.directionY=0
+        setTimeout(this.flashOut, 2000)
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText==="0"){
           this.gameOver()
