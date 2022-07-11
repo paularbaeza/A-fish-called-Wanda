@@ -22,15 +22,24 @@ class Wanda {
     this.y = this.y + this.speed * this.directionY;
   };
 
+  faceSickWanda = () => {
+    if (this.directionX ===1){
+      this.image.src="./images/wanda-sick-right.png"
+    }else if (this.directionX===-1){
+      this.image.src="./images/wanda-sick-left.png"
+    }
+  }
 
   wandaCanvasCollision = () => {
+    console.log(this.x)
     if (this.y >= canvas.height- this.h) { //suelo
       this.y = canvas.height- this.h;
     } else if (this.y <= 0) {//arriba
-      this.y = 0 ;
-    } else if (this.x + this.w >= canvas.width) { //derecha
+      this.y = 0 ;}
+    if (this.x + this.w >= canvas.width) { //derecha
       this.x = canvas.width - this.w;
     } else if (this.x <= 0) { //izquierda
+      console.log("collision izq")
       this.x = 0;
     }
   };

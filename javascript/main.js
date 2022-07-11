@@ -9,6 +9,8 @@ const startBtnDOM = document.querySelector("#start-btn");
 const gameOverDOM = document.querySelector ("#gameover-screen")
 const restartBtnDOM =document.querySelector ("#restart-btn")
 const scoreDOM = document.querySelector("#score span")
+const lifesDOM =document.querySelector ("#lifes span")
+const punctuationDOM = document.querySelector("#punctuation")
 
 let game;
 
@@ -19,6 +21,8 @@ const startGame = () => {
     splashScreenDOM.style.display = "none";
     gameOverDOM.style.display ="none"
     canvas.style.display = "block";
+    punctuationDOM.style.display="flex"
+
     scoreDOM.innerText = 0
     //...aquí empezaría el juego.
     game = new Game();
@@ -36,9 +40,10 @@ restartBtnDOM.addEventListener("click", startGame)
 window.addEventListener("keydown", (event) => {
     if (event.code === "ArrowLeft" && game.wanda.x>=0){
         game.wanda.directionX = -1
+        game.wanda.image.src="./images/wanda-happy-left.png"
     }else if(event.code ==="ArrowRight" && game.wanda.w < canvas.width){
         game.wanda.directionX =1
-    
+        game.wanda.image.src="./images/wanda-happy-right.png"
     }else if (event.code ==="ArrowUp" && game.wanda.y>=0) {
         game.wanda.directionY = -1
     }else if (event.code ==="ArrowDown" && game.wanda.y< canvas.height){

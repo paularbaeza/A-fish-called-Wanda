@@ -2,11 +2,11 @@ class Food {
     constructor(xParam, yParam) {
         //aqui todas las propiedades de los enemigos
         this.image = new Image();
-        this.image.src = "./images/apple.png";
+        this.image.src = "./images/bone.png";
         this.x = xParam; //eje x
         this.y = yParam;
-        this.w = 70; 
-        this.h = 70; 
+        this.w = 75; 
+        this.h = 40; 
         this.speed = 3;
       }
 

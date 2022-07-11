@@ -19,6 +19,12 @@ body {
   border-radius: 10px;
 }
 
+#punctuation{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+}
+
 #restart-btn {
   background-color: #e1a524;
   font-family: Rammetto One;
@@ -37,6 +43,18 @@ body {
   font-size: 30px;
   margin-top: 0;
   border-radius: 10px;
+  margin-right: 20px;
+}
+
+#lifes {
+  background-color: white;
+  font-family: Rammetto One;
+  color: #e1a524;
+  padding: 10px;
+  font-size: 30px;
+  margin-top: 0;
+  border-radius: 10px;
+  margin-left: 20px;
 }
 
 .container {
@@ -51,6 +69,7 @@ body {
 }
 
 #my-canvas,
-#gameover-screen {
+#gameover-screen, 
+#punctuation{
   display: none;
 }

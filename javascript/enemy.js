@@ -1,11 +1,11 @@
 class Enemy {
-    constructor(yParam, srcParam, hParam) {
+    constructor(yParam, srcParam, hParam, wParam) {
         //aqui todas las propiedades de los enemigos
         this.image = new Image();
         this.image.src = srcParam;
         this.x = canvas.width; //eje x
         this.y = yParam;
-        this.w = 250; 
+        this.w = wParam; 
         this.h = hParam; 
         this.speed = 3;
       }

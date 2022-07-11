@@ -9,18 +9,17 @@ class Game {
     this.wanda = new Wanda();
     this.sharksArr = [];
     this.whalesArr = [];
+    this.medusaArr = [];
     this.foodArr = [];
-  
-    //this.enemy = new Enemy ();
     this.isGameOn = true;
   }
 
   // todos los métodos del juego
-gameOver = () =>{
-  this.isGameOn = false
-  canvas.style.display = "none";
-  gameOverDOM.style.display = "flex";
-}
+  gameOver = () => {
+    this.isGameOn = false;
+    canvas.style.display = "none";
+    gameOverDOM.style.display = "flex";
+  };
 
   addEnemy = () => {
     if (
@@ -31,21 +30,37 @@ gameOver = () =>{
       let newEnemyShark = new Enemy(
         randomPositionShark,
         "./images/shark.png",
-        120
+        120,
+        250
       );
       this.sharksArr.push(newEnemyShark);
     } else if (
       (this.whalesArr.length === 0 ||
-      this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 2) && scoreDOM.innerText >=60
+        this.whalesArr[this.whalesArr.length - 1].x < canvas.width / 3) &&
+      scoreDOM.innerText >= 40
     ) {
-      let randomPositionWhale = Math.random() * (canvas.height - 170);
+      let randomPositionWhale = Math.random() * (canvas.height - 130);
       let newEnemyWhale = new Enemy(
         randomPositionWhale,
-        "./images/whale.png",
-        170
+        "./images/whale2.png",
+        130,
+        250
       );
       this.whalesArr.push(newEnemyWhale);
       //setTimeout(whalesArr,600);
+    } else if (
+      (this.medusaArr.length === 0 ||
+        this.medusaArr[this.medusaArr.length - 1].x < canvas.width / 2) &&
+      scoreDOM.innerText >= 30
+    ) {
+      let randomPositionMedusa = Math.random() * (canvas.height - 150);
+      let newEnemyMedusa = new Enemy(
+        randomPositionMedusa,
+        "./images/medusa.png",
+        150,
+        120
+      );
+      this.medusaArr.push(newEnemyMedusa);
     }
   };
 
@@ -59,37 +74,54 @@ gameOver = () =>{
   };
 
   wandaEnemyCollision = () => {
-    this.sharksArr.forEach ((eachShark) => {
-      if(
+    this.sharksArr.forEach((eachShark) => {
+      if (
         eachShark.x < this.wanda.x + this.wanda.w &&
         eachShark.x + eachShark.w > this.wanda.x &&
         eachShark.y < this.wanda.y + this.wanda.h &&
-        eachShark.h/2 + eachShark.y > this.wanda.y 
-      ){
-        this.gameOver ()
+        eachShark.h / 2 + eachShark.y > this.wanda.y
+      ) {
+        lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
+        this.wanda.faceSickWanda();
       }
-    })
-    this.whalesArr.forEach((eachWhale)=> {
-      if(eachWhale.x < this.wanda.x + this.wanda.w &&
+    });
+    this.whalesArr.forEach((eachWhale) => {
+      if (
+        eachWhale.x < this.wanda.x + this.wanda.w &&
         eachWhale.x + eachWhale.w > this.wanda.x &&
         eachWhale.y < this.wanda.y + this.wanda.h &&
-        eachWhale.h/2 + eachWhale.y > this.wanda.y){
-          this.gameOver ()
-        }
-    })
-  }
+        eachWhale.h / 2 + eachWhale.y > this.wanda.y
+      ) {
+        lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
+        this.wanda.faceSickWanda();
+      }
+    });
+    this.medusaArr.forEach((eachMedusa) => {
+      if (
+        eachMedusa.x < this.wanda.x + this.wanda.w &&
+        eachMedusa.x + eachMedusa.w > this.wanda.x &&
+        eachMedusa.y < this.wanda.y + this.wanda.h &&
+        eachMedusa.h / 2 + eachMedusa.y > this.wanda.y
+      ) {
+        lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
+        this.wanda.faceSickWanda();
+      }
+    });
+  };
 
   wandaFoodCollision = () => {
-    this.foodArr.forEach ((eachFood)=>{
-      if(eachFood.x < this.wanda.x + this.wanda.w &&
+    this.foodArr.forEach((eachFood) => {
+      if (
+        eachFood.x < this.wanda.x + this.wanda.w &&
         eachFood.x + eachFood.w > this.wanda.x &&
         eachFood.y < this.wanda.y + this.wanda.h &&
-        eachFood.h + eachFood.y > this.wanda.y){
-        this.foodArr.shift()
-         scoreDOM.innerText = Number (scoreDOM.innerText)+10
-        }
-    })
-  }
+        eachFood.h + eachFood.y > this.wanda.y
+      ) {
+        this.foodArr.shift();
+        scoreDOM.innerText = Number(scoreDOM.innerText) + 10;
+      }
+    });
+  };
 
   gameLoop = () => {
     //console.log("juego andando")
@@ -97,7 +129,7 @@ gameOver = () =>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //2. movimientos y acciones de los elementos
-    this.wanda.wandaCanvasCollision();
+
     this.addEnemy();
 
     this.sharksArr.forEach((eachShark) => {
@@ -106,10 +138,14 @@ gameOver = () =>{
     this.whalesArr.forEach((eachWhale) => {
       eachWhale.enemyMovement();
     });
+    this.medusaArr.forEach((eachMedusa) => {
+      eachMedusa.enemyMovement();
+    });
     this.wanda.moveWanda();
+    this.wanda.wandaCanvasCollision();
     this.addFood();
-    this.wandaEnemyCollision()
-    this.wandaFoodCollision()
+    this.wandaEnemyCollision();
+    this.wandaFoodCollision();
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
     this.wanda.drawWanda();
@@ -118,6 +154,9 @@ gameOver = () =>{
     });
     this.whalesArr.forEach((eachWhale) => {
       eachWhale.drawEnemy();
+    });
+    this.medusaArr.forEach((eachMedusa) => {
+      eachMedusa.drawEnemy();
     });
     this.foodArr.forEach((eachFood) => {
       eachFood.drawFood();
