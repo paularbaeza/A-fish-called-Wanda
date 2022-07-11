@@ -86,6 +86,9 @@ class Game {
         this.wanda.canCollide = false;
         this.wanda.faceSickWanda();
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
+        if (lifesDOM.innerText==="0"){
+          this.gameOver()
+        }
       }
 
       if (
@@ -111,6 +114,9 @@ class Game {
         this.wanda.canCollide = false;
         this.wanda.faceSickWanda();
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
+        if (lifesDOM.innerText==="0"){
+          this.gameOver()
+        }
       }
 
       if (
@@ -136,6 +142,9 @@ class Game {
         this.wanda.canCollide = false;
         this.wanda.faceSickWanda();
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
+        if (lifesDOM.innerText==="0"){
+          this.gameOver()
+        }
       }
 
       if (
