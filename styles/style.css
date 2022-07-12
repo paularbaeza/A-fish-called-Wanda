@@ -72,10 +72,17 @@ body {
 #splash-screen {
   margin: 0;
 }
+#sound{
+display:flex;
+flex-direction: row ;
+justify-content: flex-end;
+margin-bottom: 15px;
+}
 
 #my-canvas,
 #gameover-screen, 
-#punctuation{
+#punctuation, 
+#sound{
   display: none;
 }
 

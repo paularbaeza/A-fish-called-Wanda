@@ -34,10 +34,8 @@ class Wanda {
 
   afterWandaLoseLife = () => {
     this.canCollide = true;
-    this.directionx = 1;
-    this.directionY = 1;
-    this.x = 0;
-    this.y = 0;
+    this.directionx = 0;
+    this.directionY = 0;
     if (this.directionX === 1) {
       this.image.src = "./images/wanda-happy-right.png";
     } else if (this.directionX === -1) {
