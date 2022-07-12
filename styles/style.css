@@ -27,6 +27,12 @@ body {
   flex-direction: row;
   justify-content: flex-start
 }
+#sound {
+  display: flex;
+  align-items: center;
+
+}
+
 #punctuation-sound {
   display: flex;
   flex-direction: row;
@@ -66,6 +72,17 @@ body {
   margin-left: 20px;
 }
 
+#max-score{
+  background-color: #e1a524;
+  font-family: Rammetto One;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 0;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -76,22 +93,17 @@ body {
 #splash-screen {
   margin: 0;
 }
-/*#sound {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-bottom: 15px;
-}*/
+
 #soundOn-btn {
   background-color: #e1a524;
   border: none;
-  margin-left: 15px;
+  margin-right: 5px;
 }
 
 #soundOff-btn {
   background-color: #e1a524;
   border: none;
-  margin-right: 15px;
+  margin-left: 5px;
 }
 
 #my-canvas,

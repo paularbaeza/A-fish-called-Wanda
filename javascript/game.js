@@ -18,7 +18,7 @@ class Game {
     this.gameMusic = new Audio("./sounds/bajo-del-mar.mp3");
     this.winLife = new Audio("./sounds/woo-hoo.mp3");
     this.loseLife = new Audio("./sounds/pierde-vida.mp3");
-    this.eatsBone = new Audio("./sounds/come-hueso.mp3");
+    this.eatsBone = new Audio("./sounds/points.mp3");
     this.canPlaySound = true;
   }
 
@@ -29,6 +29,7 @@ class Game {
     canvas.style.display = "none";
     gameOverDOM.style.display = "flex";
     lifesBoxDOM.style.display = "none";
+    maxScoreDOM.style.display ="flex"
   };
 
   drawFlash = () => {
@@ -99,7 +100,7 @@ class Game {
       let food = new Food(
         randomPositionXFood,
         randomPositionYFood,
-        "./images/bone1.png",
+        "./images/bone.png",
         90,
         45
       );
@@ -123,12 +124,8 @@ class Game {
 
       setTimeout(() => {
         this.specialBoneArr.shift();
-      }, 10000);
+      }, 5000);
     }
-  };
-
-  changeCanGainLife = () => {
-    this.wanda.canGainLife = true;
   };
 
   wandaEnemyCollision = () => {
@@ -142,6 +139,7 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
+        this.wanda.canMove = false
         this.showFlash = true;
         if (this.canPlaySound === true) {
           this.loseLife.play();
@@ -174,6 +172,7 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
+        this.wanda.canMove = false
         if (this.canPlaySound === true) {
           this.loseLife.play();
         }
@@ -209,6 +208,7 @@ class Game {
           this.loseLife.play();
         }
         this.wanda.canCollide = false;
+        this.wanda.canMove = false
         this.showFlash = true;
         this.wanda.faceSickWanda();
         setTimeout(this.flashOut, 1000);
@@ -261,10 +261,15 @@ class Game {
           this.winLife.play();
         }
         lifesDOM.innerText = Number(lifesDOM.innerText) + 1;
-        setTimeout(this.changeCanGainLife, 20000);
       }
     });
   };
+
+  maxScore = () => {
+    if (scoreDOM.innerText > maxScoreNumberDOM.innerText){
+      maxScoreNumberDOM.innerText=scoreDOM.innerText
+    }
+  }
 
   gameLoop = () => {
     //1. limpiar el canvas
@@ -287,10 +292,10 @@ class Game {
     this.wanda.wandaCanvasCollision();
     this.addFood();
     this.addSpecialBone();
-    //this.timingFirstSpecialBone();
     this.wandaEnemyCollision();
     this.wandaFoodCollision();
     this.wandaSpecialBoneCollision();
+    this.maxScore()
 
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);

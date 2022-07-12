@@ -11,10 +11,11 @@ class Wanda {
     this.directionX = 1;
     this.directionY = 1;
     this.canCollide = true;
+    this.canMove = true;
     this.canGainLife = false;
-    setTimeout(() => {
-      this.canGainLife = true
-    },20000 )
+    setInterval(() => {
+      this.canGainLife = true;
+    }, 25000);
   }
 
   //aqui los métodos de Wanda
@@ -39,6 +40,7 @@ class Wanda {
     this.canCollide = true;
     this.directionx = 0;
     this.directionY = 0;
+    this.canMove = true;
     if (this.directionX === 1) {
       this.image.src = "./images/wanda-happy-right.png";
     } else if (this.directionX === -1) {
