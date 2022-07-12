@@ -9,11 +9,11 @@ body {
   background-color: lightblue;
 }
 
-#gameover-screen{
-  margin-top: 0px ;
+#gameover-screen {
+  margin-top: 0px;
 }
 
-#start-btn{
+#start-btn {
   background-color: #e1a524;
   font-family: Rammetto One;
   color: white;
@@ -22,11 +22,15 @@ body {
   margin-top: -330px;
   border-radius: 10px;
 }
-
-#punctuation{
-  display:flex;
-  flex-direction:row;
-  justify-content: space-evenly;
+#punctuation {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start
+}
+#punctuation-sound {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #restart-btn {
@@ -72,18 +76,26 @@ body {
 #splash-screen {
   margin: 0;
 }
-#sound{
-display:flex;
-flex-direction: row ;
-justify-content: flex-end;
-margin-bottom: 15px;
+/*#sound {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}*/
+#soundOn-btn {
+  background-color: #e1a524;
+  border: none;
+  margin-left: 15px;
+}
+
+#soundOff-btn {
+  background-color: #e1a524;
+  border: none;
+  margin-right: 15px;
 }
 
 #my-canvas,
-#gameover-screen, 
-#punctuation, 
-#sound{
+#gameover-screen,
+#game-screen {
   display: none;
 }
-
-

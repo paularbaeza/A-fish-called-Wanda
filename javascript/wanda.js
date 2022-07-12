@@ -11,7 +11,10 @@ class Wanda {
     this.directionX = 1;
     this.directionY = 1;
     this.canCollide = true;
-    this.canGainLife = true;
+    this.canGainLife = false;
+    setTimeout(() => {
+      this.canGainLife = true
+    },20000 )
   }
 
   //aqui los métodos de Wanda

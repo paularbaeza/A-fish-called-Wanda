@@ -9,12 +9,11 @@ const startBtnDOM = document.querySelector("#start-btn");
 const gameOverDOM = document.querySelector("#gameover-screen");
 const restartBtnDOM = document.querySelector("#restart-btn");
 const scoreDOM = document.querySelector("#score span");
+const lifesBoxDOM =document.querySelector("#lifes")
 const lifesDOM = document.querySelector("#lifes span");
-const punctuationDOM = document.querySelector("#punctuation");
-const lifesBoxDOM = document.querySelector("#lifes");
-const soundDOM = document.querySelector("#sound");
 const soundOnBtnDOM = document.querySelector("#soundOn-btn");
 const soundOffBtonDOM = document.querySelector("#soundOff-btn");
+const gameScreenDOM =document.querySelector("#game-screen")
 
 let game;
 
@@ -24,24 +23,25 @@ const startGame = () => {
   console.log("inicia el juego");
   splashScreenDOM.style.display = "none";
   gameOverDOM.style.display = "none";
-  soundDOM.style.display = "flex";
+  gameScreenDOM.style.display="block";
   canvas.style.display = "block";
-  punctuationDOM.style.display = "flex";
-  lifesBoxDOM.style.display = "flex";
   lifesDOM.innerText = 3;
   scoreDOM.innerText = 0;
   //...aquí empezaría el juego.
   game = new Game();
+  playMusic()
   console.log(game);
   game.gameLoop();
 };
 
 const playMusic = () => {
   game.gameMusic.play();
+  game.canPlaySound =true
 };
 
 const stopMusic = () => {
   game.gameMusic.pause();
+  game.canPlaySound = false
 };
 
 

@@ -19,6 +19,7 @@ class Game {
     this.winLife = new Audio("./sounds/woo-hoo.mp3");
     this.loseLife = new Audio("./sounds/pierde-vida.mp3");
     this.eatsBone = new Audio("./sounds/come-hueso.mp3");
+    this.canPlaySound = true;
   }
 
   // todos los métodos del juego
@@ -26,8 +27,8 @@ class Game {
   gameOver = () => {
     this.isGameOn = false;
     canvas.style.display = "none";
-    lifesBoxDOM.style.display = "none";
     gameOverDOM.style.display = "flex";
+    lifesBoxDOM.style.display = "none";
   };
 
   drawFlash = () => {
@@ -118,11 +119,12 @@ class Game {
         55
       );
       this.specialBoneArr.push(specialBone);
-    }
-  };
+      this.wanda.canGainLife = false;
 
-  timingFirstSpecialBone = () => {
-    setTimeout(this.addSpecialBone, 20000);
+      setTimeout(() => {
+        this.specialBoneArr.shift();
+      }, 10000);
+    }
   };
 
   changeCanGainLife = () => {
@@ -141,7 +143,9 @@ class Game {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
         this.showFlash = true;
-        this.loseLife.play();
+        if (this.canPlaySound === true) {
+          this.loseLife.play();
+        }
         this.wanda.faceSickWanda();
         setTimeout(this.flashOut, 2000);
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
@@ -170,7 +174,9 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
-        this.loseLife.play();
+        if (this.canPlaySound === true) {
+          this.loseLife.play();
+        }
         this.showFlash = true;
         this.wanda.faceSickWanda();
         setTimeout(this.flashOut, 1000);
@@ -199,7 +205,9 @@ class Game {
         this.wanda.canCollide === true
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
-        this.loseLife.play();
+        if (this.canPlaySound === true) {
+          this.loseLife.play();
+        }
         this.wanda.canCollide = false;
         this.showFlash = true;
         this.wanda.faceSickWanda();
@@ -231,7 +239,9 @@ class Game {
         eachFood.h + eachFood.y > this.wanda.y &&
         this.wanda.canCollide === true
       ) {
-        this.eatsBone.play();
+        if (this.canPlaySound === true) {
+          this.eatsBone.play();
+        }
         this.foodArr.shift();
         scoreDOM.innerText = Number(scoreDOM.innerText) + 10;
       }
@@ -247,15 +257,14 @@ class Game {
         eachSpecialBone.h + eachSpecialBone.y > this.wanda.y
       ) {
         this.specialBoneArr.shift();
-        this.winLife.play();
+        if (this.canPlaySound === true) {
+          this.winLife.play();
+        }
         lifesDOM.innerText = Number(lifesDOM.innerText) + 1;
-        this.wanda.canGainLife = false;
         setTimeout(this.changeCanGainLife, 20000);
       }
     });
   };
-
-
 
   gameLoop = () => {
     //1. limpiar el canvas
@@ -277,13 +286,11 @@ class Game {
     this.wanda.moveWanda();
     this.wanda.wandaCanvasCollision();
     this.addFood();
-    this.timingFirstSpecialBone();
+    this.addSpecialBone();
+    //this.timingFirstSpecialBone();
     this.wandaEnemyCollision();
     this.wandaFoodCollision();
     this.wandaSpecialBoneCollision();
-    this.gameMusic.play()
-    
-   
 
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
