@@ -11,6 +11,7 @@ class Wanda {
     this.directionX = 1;
     this.directionY = 1;
     this.canCollide = true;
+    this.canGainLife = true;
   }
 
   //aqui los métodos de Wanda
@@ -24,37 +25,40 @@ class Wanda {
   };
 
   faceSickWanda = () => {
-    if (this.directionX ===1){
-      this.image.src="./images/wanda-sick-right.png"
-    }else if (this.directionX===-1){
-      this.image.src="./images/wanda-sick-left.png"
+    if (this.directionX === 1) {
+      this.image.src = "./images/wanda-sick-right.png";
+    } else if (this.directionX === -1) {
+      this.image.src = "./images/wanda-sick-left.png";
     }
-  }
+  };
 
   afterWandaLoseLife = () => {
     this.canCollide = true;
-    this.directionx= 1
-    this.directionY =1
-    this.x=0
-    this.y=0
+    this.directionx = 1;
+    this.directionY = 1;
+    this.x = 0;
+    this.y = 0;
     if (this.directionX === 1) {
       this.image.src = "./images/wanda-happy-right.png";
     } else if (this.directionX === -1) {
       this.image.src = "./images/wanda-happy-left.png";
-
     }
   };
 
   wandaCanvasCollision = () => {
-    if (this.y >= canvas.height- this.h) { //suelo
-      this.y = canvas.height- this.h;
-    } else if (this.y <= 0) {//arriba
-      this.y = 0 ;}
-    if (this.x + this.w >= canvas.width) { //derecha
+    if (this.y >= canvas.height - this.h) {
+      //suelo
+      this.y = canvas.height - this.h;
+    } else if (this.y <= 0) {
+      //arriba
+      this.y = 0;
+    }
+    if (this.x + this.w >= canvas.width) {
+      //derecha
       this.x = canvas.width - this.w;
-    } else if (this.x <= 0) { //izquierda
+    } else if (this.x <= 0) {
+      //izquierda
       this.x = 0;
     }
   };
-
 }

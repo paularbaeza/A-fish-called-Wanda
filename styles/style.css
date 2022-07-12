@@ -9,6 +9,10 @@ body {
   background-color: lightblue;
 }
 
+#gameover-screen{
+  margin-top: 0px ;
+}
+
 #start-btn{
   background-color: #e1a524;
   font-family: Rammetto One;
@@ -26,13 +30,14 @@ body {
 }
 
 #restart-btn {
-  background-color: #e1a524;
+  background-color: white;
   font-family: Rammetto One;
-  color: white;
+  color: #e1a524;
   padding: 20px;
   font-size: 60px;
   margin-top: 30px;
   border-radius: 10px;
+  border-color: white;
 }
 
 #score {
@@ -73,3 +78,5 @@ body {
 #punctuation{
   display: none;
 }
+
+
