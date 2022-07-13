@@ -94,7 +94,6 @@ class Game {
         this.piranaArr[this.piranaArr.length - 1].y > canvas.height) &&
       scoreDOM.innerText >= 120
     ) {
-
       let positionPiranaX = canvas.width / 2;
       let newEnemyPirana = new Enemy(
         0,
@@ -173,6 +172,7 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
+        this.wanda.canGainLife = false;
         this.wanda.canMove = false;
         this.showFlash = true;
         if (this.canPlaySound === true) {
@@ -207,6 +207,8 @@ class Game {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
         this.wanda.canMove = false;
+        this.wanda.canGainLife = false;
+
         if (this.canPlaySound === true) {
           this.loseLife.play();
         }
@@ -243,6 +245,8 @@ class Game {
         }
         this.wanda.canCollide = false;
         this.wanda.canMove = false;
+        this.wanda.canGainLife = false;
+
         this.showFlash = true;
         this.wanda.faceSickWanda();
         setTimeout(this.flashOut, 1000);
@@ -275,6 +279,7 @@ class Game {
           this.loseLife.play();
         }
         this.wanda.canCollide = false;
+        this.wanda.canGainLife = false;
         this.wanda.canMove = false;
         this.showFlash = true;
         this.wanda.faceSickWanda();

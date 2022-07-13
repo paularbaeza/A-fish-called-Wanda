@@ -22,8 +22,8 @@ class Enemy {
         this.x = this.x - this.speed
     }
     piranaMovement = () => {
-        this.x = this.x + (this.speed -1) * this.directionX;
-        this.y = this.y + (this.speed -1) * this.directionY
+        this.x = this.x + (this.speed -1.5) * this.directionX;
+        this.y = this.y + (this.speed -1.5) * this.directionY
     }
 
 }

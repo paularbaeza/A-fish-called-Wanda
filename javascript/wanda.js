@@ -41,6 +41,7 @@ class Wanda {
     this.directionx = 0;
     this.directionY = 0;
     this.canMove = true;
+    this.canGainLife =true;
     if (this.directionX === 1) {
       this.image.src = "./images/wanda-happy-right.png";
     } else if (this.directionX === -1) {
