@@ -1,8 +1,6 @@
 class Game {
   constructor() {
     //todas las propiedades del juego
-
-    //imagen de fondo
     this.background = new Image();
     this.background.src = "./images/fondo-mar.jpg";
     this.isGameOn = true;
@@ -10,6 +8,7 @@ class Game {
     this.sharksArr = [];
     this.dolphinsArr = [];
     this.medusaArr = [];
+    this.piranaArr = [];
     this.foodArr = [];
     this.specialBoneArr = [];
     this.canCollide = true;
@@ -29,8 +28,14 @@ class Game {
     canvas.style.display = "none";
     gameOverDOM.style.display = "flex";
     lifesBoxDOM.style.display = "none";
-    maxScoreDOM.style.display ="flex"
-    game.gameMusic.pause()
+    maxScoreDOM.style.display = "flex";
+    game.gameMusic.pause();
+
+    //guardar informacion del score en el local storage
+    localStorage.setItem("highscore", scoreDOM.innerText);
+    if (maxScoreNumberDOM.innerText < localStorage.getItem("highscore")) {
+      maxScoreNumberDOM.innerText = localStorage.getItem("highscore");
+    }
   };
 
   drawFlash = () => {
@@ -50,6 +55,7 @@ class Game {
       let randomPositionShark = Math.random() * (canvas.height - 120);
       let newEnemyShark = new Enemy(
         randomPositionShark,
+        canvas.width,
         "./images/shark.png",
         120,
         250
@@ -60,9 +66,10 @@ class Game {
         this.dolphinsArr[this.dolphinsArr.length - 1].x < canvas.width / 4) &&
       scoreDOM.innerText >= 80
     ) {
-      let randomPositionDolphin = Math.random() * (canvas.height - 300);
+      let randomPositionDolphin = Math.random() * (canvas.height - 130);
       let newEnemyDolphin = new Enemy(
         randomPositionDolphin,
+        canvas.width,
         "./images/dolphin.png",
         130,
         300
@@ -73,15 +80,41 @@ class Game {
         this.medusaArr[this.medusaArr.length - 1].x < canvas.width * 0.4) &&
       scoreDOM.innerText >= 40
     ) {
-      let randomPositionMedusa = Math.random() * (canvas.height - 120);
+      let randomPositionMedusa = Math.random() * (canvas.height - 130);
       let newEnemyMedusa = new Enemy(
         randomPositionMedusa,
+        canvas.width,
         "./images/medusa.png",
         130,
         90
       );
       this.medusaArr.push(newEnemyMedusa);
+    } else if (
+      (this.piranaArr.length === 0 ||
+        this.piranaArr[this.piranaArr.length - 1].y > canvas.height) &&
+      scoreDOM.innerText >= 120
+    ) {
+
+      let positionPiranaX = canvas.width / 2;
+      let newEnemyPirana = new Enemy(
+        0,
+        positionPiranaX,
+        "./images/pirana.png",
+        100,
+        90
+      );
+      this.piranaArr.push(newEnemyPirana);
     }
+  };
+
+  piranaMovementTowardsWanda = () => {
+    this.piranaArr.forEach((eachPirana) => {
+      if (eachPirana.x > this.wanda.x) {
+        eachPirana.directionX = -1;
+      } else if (eachPirana.x < this.wanda.x) {
+        eachPirana.directionX = 1;
+      }
+    });
   };
 
   cleanEnemyArr = () => {
@@ -140,7 +173,7 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
-        this.wanda.canMove = false
+        this.wanda.canMove = false;
         this.showFlash = true;
         if (this.canPlaySound === true) {
           this.loseLife.play();
@@ -173,7 +206,7 @@ class Game {
       ) {
         lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
         this.wanda.canCollide = false;
-        this.wanda.canMove = false
+        this.wanda.canMove = false;
         if (this.canPlaySound === true) {
           this.loseLife.play();
         }
@@ -209,7 +242,7 @@ class Game {
           this.loseLife.play();
         }
         this.wanda.canCollide = false;
-        this.wanda.canMove = false
+        this.wanda.canMove = false;
         this.showFlash = true;
         this.wanda.faceSickWanda();
         setTimeout(this.flashOut, 1000);
@@ -224,6 +257,39 @@ class Game {
         eachMedusa.x + eachMedusa.w > this.wanda.x &&
         eachMedusa.y < this.wanda.y + this.wanda.h &&
         eachMedusa.h / 2 + eachMedusa.y > this.wanda.y &&
+        this.wanda.canCollide === false
+      ) {
+        lifesDOM.innerText = lifesDOM.innerText;
+      }
+    });
+    this.piranaArr.forEach((eachPirana) => {
+      if (
+        eachPirana.x < this.wanda.x + this.wanda.w &&
+        eachPirana.x + eachPirana.w > this.wanda.x &&
+        eachPirana.y < this.wanda.y + this.wanda.h &&
+        eachPirana.h / 2 + eachPirana.y > this.wanda.y &&
+        this.wanda.canCollide === true
+      ) {
+        lifesDOM.innerText = Number(lifesDOM.innerText) - 1;
+        if (this.canPlaySound === true) {
+          this.loseLife.play();
+        }
+        this.wanda.canCollide = false;
+        this.wanda.canMove = false;
+        this.showFlash = true;
+        this.wanda.faceSickWanda();
+        setTimeout(this.flashOut, 1000);
+        setTimeout(this.wanda.afterWandaLoseLife, 2000);
+        if (lifesDOM.innerText === "0") {
+          this.gameOver();
+        }
+      }
+
+      if (
+        eachPirana.x < this.wanda.x + this.wanda.w &&
+        eachPirana.x + eachPirana.w > this.wanda.x &&
+        eachPirana.y < this.wanda.y + this.wanda.h &&
+        eachPirana.h / 2 + eachPirana.y > this.wanda.y &&
         this.wanda.canCollide === false
       ) {
         lifesDOM.innerText = lifesDOM.innerText;
@@ -266,11 +332,18 @@ class Game {
     });
   };
 
-  maxScore = () => {
+  /*maxScore = () => {
     if (Number (scoreDOM.innerText) > Number (maxScoreNumberDOM.innerText)){
       maxScoreNumberDOM.innerText=scoreDOM.innerText
     }
-  }
+  }*/
+
+  /*maxScore = () => {
+    let currentScore = scoreDOM.innerText;
+    if (Number(currentScore) > localStorage.getItem("highscore")) {
+      maxScoreNumberDOM.innerText = localStorage.getItem("highscore");
+    }
+  };*/
 
   gameLoop = () => {
     //1. limpiar el canvas
@@ -289,6 +362,10 @@ class Game {
     this.medusaArr.forEach((eachMedusa) => {
       eachMedusa.enemyMovement();
     });
+    this.piranaArr.forEach((eachPirana) => {
+      eachPirana.piranaMovement();
+    });
+    this.piranaMovementTowardsWanda();
     this.wanda.moveWanda();
     this.wanda.wandaCanvasCollision();
     this.addFood();
@@ -296,7 +373,7 @@ class Game {
     this.wandaEnemyCollision();
     this.wandaFoodCollision();
     this.wandaSpecialBoneCollision();
-    this.maxScore()
+    //this.maxScore();
 
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
@@ -309,6 +386,9 @@ class Game {
     });
     this.medusaArr.forEach((eachMedusa) => {
       eachMedusa.drawEnemy();
+    });
+    this.piranaArr.forEach((eachPirana) => {
+      eachPirana.drawEnemy();
     });
     this.foodArr.forEach((eachFood) => {
       eachFood.drawFood();

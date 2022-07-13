@@ -60,6 +60,8 @@ const stopMusic = () => {
   game.canPlaySound = false;
 };
 
+
+
 // * ADD EVENT LISTENERS
 startBtnDOM.addEventListener("click", startGame);
 restartBtnDOM.addEventListener("click", reStartGame);
