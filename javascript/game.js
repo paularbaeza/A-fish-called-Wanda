@@ -30,6 +30,7 @@ class Game {
     gameOverDOM.style.display = "flex";
     lifesBoxDOM.style.display = "none";
     maxScoreDOM.style.display ="flex"
+    game.gameMusic.pause()
   };
 
   drawFlash = () => {
@@ -63,7 +64,7 @@ class Game {
       let newEnemyDolphin = new Enemy(
         randomPositionDolphin,
         "./images/dolphin.png",
-        190,
+        130,
         300
       );
       this.dolphinsArr.push(newEnemyDolphin);
@@ -266,7 +267,7 @@ class Game {
   };
 
   maxScore = () => {
-    if (scoreDOM.innerText > maxScoreNumberDOM.innerText){
+    if (Number (scoreDOM.innerText) > Number (maxScoreNumberDOM.innerText)){
       maxScoreNumberDOM.innerText=scoreDOM.innerText
     }
   }
