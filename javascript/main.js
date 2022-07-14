@@ -14,10 +14,10 @@ const lifesDOM = document.querySelector("#lifes span");
 const soundOnBtnDOM = document.querySelector("#soundOn-btn");
 const soundOffBtonDOM = document.querySelector("#soundOff-btn");
 const gameScreenDOM = document.querySelector("#game-screen");
-const maxScoreDOM = document.querySelector("#max-score")
-const maxScoreNumberDOM = document.querySelector("#max-score span")
-let maxScore = Number(maxScoreNumberDOM.innerText)
-let actualScore = Number (scoreDOM.innerText)
+const maxScoreDOM = document.querySelector("#max-score");
+const maxScoreNumberDOM = document.querySelector("#max-score span");
+let maxScore = Number(maxScoreNumberDOM.innerText);
+let actualScore = Number(scoreDOM.innerText);
 
 let game;
 
@@ -28,7 +28,7 @@ const startGame = () => {
   gameOverDOM.style.display = "none";
   gameScreenDOM.style.display = "block";
   canvas.style.display = "block";
-  maxScoreDOM.style.display = "flex"
+  maxScoreDOM.style.display = "flex";
   lifesDOM.innerText = 3;
   scoreDOM.innerText = 0;
   //...aquí empezaría el juego.
@@ -42,8 +42,8 @@ const reStartGame = () => {
   gameOverDOM.style.display = "none";
   gameScreenDOM.style.display = "block";
   canvas.style.display = "block";
-  maxScoreDOM.style.display = "block"
-  lifesBoxDOM.style.display ="flex"
+  maxScoreDOM.style.display = "block";
+  lifesBoxDOM.style.display = "flex";
   lifesDOM.innerText = 3;
   scoreDOM.innerText = 0;
   //...aquí empezaría el juego.
@@ -62,53 +62,39 @@ const stopMusic = () => {
   game.canPlaySound = false;
 };
 
-
-/*const compareScore = () => {
-  const keyArr= []
-  Object.keys(storage).forEach ((eachKey) => {
-    console.log(eachKey)
-    keyArr.push(eachKey)
-  })
-  if(keyArr[0] > keyArr[1]){
-    keyArr.pop()
-  }else {
-    keyArr.shift()
-  }
-  scoreDOM.innerHTML= keyArr[0]
-}*/
-
 // * ADD EVENT LISTENERS
 startBtnDOM.addEventListener("click", startGame);
 restartBtnDOM.addEventListener("click", reStartGame);
 soundOnBtnDOM.addEventListener("click", playMusic);
 soundOffBtonDOM.addEventListener("click", stopMusic);
-document.addEventListener('DOMContentLoaded', () => {
-  maxScoreNumberDOM.innerText = (localStorage.getItem("highscore"))})
+document.addEventListener("DOMContentLoaded", () => {
+  maxScoreNumberDOM.innerText = localStorage.getItem("highscore");
+});
 
 //adeventlistener para movimiento de Wanda
 window.addEventListener("keydown", (event) => {
   if (
-    (event.code === "ArrowLeft" || event.code ==="KeyA" )&&
+    (event.code === "ArrowLeft" || event.code === "KeyA") &&
     game.wanda.x >= 0 &&
     game.wanda.canMove === true
   ) {
     game.wanda.directionX = -1;
     game.wanda.image.src = "./images/wanda-happy-left.png";
   } else if (
-    (event.code === "ArrowRight" || event.code === "KeyD")&&
+    (event.code === "ArrowRight" || event.code === "KeyD") &&
     game.wanda.w < canvas.width &&
     game.wanda.canMove === true
   ) {
     game.wanda.directionX = 1;
     game.wanda.image.src = "./images/wanda-happy-right.png";
   } else if (
-    (event.code === "ArrowUp" || event.code ==="KeyW" )&&
+    (event.code === "ArrowUp" || event.code === "KeyW") &&
     game.wanda.y >= 0 &&
     game.wanda.canMove === true
   ) {
     game.wanda.directionY = -1;
   } else if (
-    (event.code === "ArrowDown" || event.code === "KeyS" )&&
+    (event.code === "ArrowDown" || event.code === "KeyS") &&
     game.wanda.y < canvas.height &&
     game.wanda.canMove === true
   ) {

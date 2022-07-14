@@ -13,17 +13,37 @@
       <div id="splash-screen" class="container">
         <img src="./images/portada.png" width="700" alt="portada" />
         <button id="start-btn">JUGAR</button>
+        <input type="checkbox" id="instructions"></input>
+        <label for="instructions">INSTRUCCIONES</label>
+        <div class="instructions">
+          <h4>¡Descubre con Wanda el mundo submarino!</h4>
+          <p>
+            Mueve a Wanda con 
+            <img src="./images/arrows-white.png" width="60" /> o 
+            <img src="./images/letters-white.png" width="60" /> para esquivar
+            a todas las criaturas marinas
+            <img src="./images/shark.png" width="90" />
+            <img src="./images/medusa.png" width="30" /><img
+              src="./images/dolphin.png"
+              width="100"
+            /><img src="./images/pirana-left.png" width="50" />que se
+            encuentren a tu paso. Coge todos los huesos
+            <img src="./images/bone.png" width="50" />que puedas para sumar
+            puntos. ¡Los huesos especiales
+            <img src="images/special-bone.png" width="40" />te sumarán una
+            vida!
+          </p></div>
       </div>
 
       <!-- EL JUEGO -->
       <div id="game-screen">
         <div id="punctuation-sound">
           <div id="punctuation">
-            <h3 id="score">Score: <span> 0</span></h3>
-            <h3 id="lifes">Vidas: <span> 3</span></h3>
+            <h3 id="score">Score:<span>0</span></h3>
+            <h3 id="lifes">Vidas:<span>3</span></h3>
           </div>
           <div id="maxscore-sound">
-            <h3 id="max-score">Max. score: <span> 0</span></h3>
+            <h3 id="max-score">Max. score:<span>0</span></h3>
             <button id="soundOn-btn">
               <img src="./images/music-on.png" width="35" />
             </button>

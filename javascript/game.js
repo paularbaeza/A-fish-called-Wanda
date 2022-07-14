@@ -15,13 +15,13 @@ class Game {
     this.isGameOn = true;
     this.showFlash = false;
     this.gameMusic = new Audio("./sounds/bajo-del-mar.mp3");
-    this.gameMusic.volume=0.3
+    this.gameMusic.volume = 0.2;
     this.winLife = new Audio("./sounds/woo-hoo.mp3");
-    this.winLife.volume = 0.2
+    this.winLife.volume = 0.2;
     this.loseLife = new Audio("./sounds/pierde-vida.mp3");
-    this.loseLife.volume = 0.2
+    this.loseLife.volume = 0.2;
     this.eatsBone = new Audio("./sounds/points.mp3");
-    this.eatsBone.volume = 0.2
+    this.eatsBone.volume = 0.2;
     this.canPlaySound = true;
   }
 
@@ -34,12 +34,11 @@ class Game {
     lifesBoxDOM.style.display = "none";
     maxScoreDOM.style.display = "flex";
     game.gameMusic.pause();
-    
     this.maxScore();
 
     localStorage.setItem("highscore", Number(maxScoreNumberDOM.innerText));
-    if (Number (scoreDOM.innerText) > localStorage.getItem("highscore")) {
-      localStorage.setItem("highscore", Number (scoreDOM.innerText))
+    if (Number(scoreDOM.innerText) > localStorage.getItem("highscore")) {
+      localStorage.setItem("highscore", Number(scoreDOM.innerText));
     }
   };
 
@@ -82,13 +81,13 @@ class Game {
       this.dolphinsArr.push(newEnemyDolphin);
     } else if (
       (this.medusaArr.length === 0 ||
-        this.medusaArr[this.medusaArr.length - 1].x < canvas.width * 0.4) &&
+        this.medusaArr[this.medusaArr.length - 1].x > canvas.width / 1.5) &&
       scoreDOM.innerText >= 40
     ) {
       let randomPositionMedusa = Math.random() * (canvas.height - 130);
       let newEnemyMedusa = new Enemy(
         randomPositionMedusa,
-        canvas.width,
+        0,
         "./images/medusa.png",
         130,
         90
@@ -96,7 +95,7 @@ class Game {
       this.medusaArr.push(newEnemyMedusa);
     } else if (
       (this.piranaArr.length === 0 ||
-        this.piranaArr[this.piranaArr.length - 1].y > canvas.height*2) &&
+        this.piranaArr[this.piranaArr.length - 1].y > canvas.height * 2) &&
       scoreDOM.innerText >= 120
     ) {
       let positionPiranaX = canvas.width / 2;
@@ -105,7 +104,7 @@ class Game {
         positionPiranaX,
         "./images/pirana-left.png",
         70,
-        110,
+        110
       );
       this.piranaArr.push(newEnemyPirana);
     }
@@ -115,10 +114,10 @@ class Game {
     this.piranaArr.forEach((eachPirana) => {
       if (eachPirana.x > this.wanda.x) {
         eachPirana.directionX = -1;
-        eachPirana.image.src = "./images/pirana-left.png"
+        eachPirana.image.src = "./images/pirana-left.png";
       } else if (eachPirana.x < this.wanda.x) {
         eachPirana.directionX = 1;
-        eachPirana.image.src = "./images/pirana-rigth.png"
+        eachPirana.image.src = "./images/pirana-rigth.png";
       }
     });
   };
@@ -128,8 +127,10 @@ class Game {
       this.sharksArr.shift();
     } else if (this.dolphinsArr[0].x + this.dolphinsArr[0].w < 0) {
       this.dolphinsArr.shift();
-    } else if (this.medusaArr[0].x + this.medusaArr[0].w < 0) {
+    } else if (this.medusaArr[0].x + this.medusaArr[0].w > canvas.width) {
       this.medusaArr.shift();
+    } else if (this.piranaArr[0].y + this.piranaArr[0].h > canvas.height * 2) {
+      this.piranaArr.shift();
     }
   };
 
@@ -345,11 +346,10 @@ class Game {
   };
 
   maxScore = () => {
-    if (Number (scoreDOM.innerText) > Number (maxScoreNumberDOM.innerText)){
-      maxScoreNumberDOM.innerText=scoreDOM.innerText
+    if (Number(scoreDOM.innerText) > Number(maxScoreNumberDOM.innerText)) {
+      maxScoreNumberDOM.innerText = scoreDOM.innerText;
     }
-  }
-
+  };
 
   gameLoop = () => {
     //1. limpiar el canvas
@@ -366,7 +366,7 @@ class Game {
       eachDolphin.enemyMovement();
     });
     this.medusaArr.forEach((eachMedusa) => {
-      eachMedusa.enemyMovement();
+      eachMedusa.medusaMovement();
     });
     this.piranaArr.forEach((eachPirana) => {
       eachPirana.piranaMovement();
@@ -379,7 +379,6 @@ class Game {
     this.wandaEnemyCollision();
     this.wandaFoodCollision();
     this.wandaSpecialBoneCollision();
-
 
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
