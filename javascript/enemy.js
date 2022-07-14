@@ -26,4 +26,5 @@ class Enemy {
         this.y = this.y + (this.speed -1.5) * this.directionY
     }
 
+    
 }

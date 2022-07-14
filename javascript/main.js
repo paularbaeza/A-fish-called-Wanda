@@ -16,6 +16,7 @@ const soundOffBtonDOM = document.querySelector("#soundOff-btn");
 const gameScreenDOM = document.querySelector("#game-screen");
 const maxScoreDOM = document.querySelector("#max-score")
 const maxScoreNumberDOM = document.querySelector("#max-score span")
+//const storage = window.localStorage
 
 let game;
 
@@ -60,7 +61,19 @@ const stopMusic = () => {
   game.canPlaySound = false;
 };
 
-
+/*const compareScore = () => {
+  const keyArr= []
+  Object.keys(storage).forEach ((eachKey) => {
+    console.log(eachKey)
+    keyArr.push(eachKey)
+  })
+  if(keyArr[0] > keyArr[1]){
+    keyArr.pop()
+  }else {
+    keyArr.shift()
+  }
+  scoreDOM.innerHTML= keyArr[0]
+}*/
 
 // * ADD EVENT LISTENERS
 startBtnDOM.addEventListener("click", startGame);

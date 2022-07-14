@@ -15,9 +15,13 @@ class Game {
     this.isGameOn = true;
     this.showFlash = false;
     this.gameMusic = new Audio("./sounds/bajo-del-mar.mp3");
+    this.gameMusic.volume=0.3
     this.winLife = new Audio("./sounds/woo-hoo.mp3");
+    this.winLife.volume = 0.2
     this.loseLife = new Audio("./sounds/pierde-vida.mp3");
+    this.loseLife.volume = 0.2
     this.eatsBone = new Audio("./sounds/points.mp3");
+    this.eatsBone.volume = 0.2
     this.canPlaySound = true;
   }
 
@@ -32,9 +36,12 @@ class Game {
     game.gameMusic.pause();
 
     //guardar informacion del score en el local storage
-    localStorage.setItem("highscore", scoreDOM.innerText);
-    if (maxScoreNumberDOM.innerText < localStorage.getItem("highscore")) {
-      maxScoreNumberDOM.innerText = localStorage.getItem("highscore");
+    let maxScore = Number(maxScoreNumberDOM.innerText)
+    let actualScore = Number (scoreDOM.innerText)
+
+    localStorage.setItem("highscore", maxScore);
+    if (actualScore > localStorage.getItem("highscore")) {
+      local
     }
   };
 
@@ -91,16 +98,16 @@ class Game {
       this.medusaArr.push(newEnemyMedusa);
     } else if (
       (this.piranaArr.length === 0 ||
-        this.piranaArr[this.piranaArr.length - 1].y > canvas.height) &&
+        this.piranaArr[this.piranaArr.length - 1].y > canvas.height*2) &&
       scoreDOM.innerText >= 120
     ) {
       let positionPiranaX = canvas.width / 2;
       let newEnemyPirana = new Enemy(
         0,
         positionPiranaX,
-        "./images/pirana.png",
-        100,
-        90
+        "./images/pirana-left.png",
+        70,
+        110,
       );
       this.piranaArr.push(newEnemyPirana);
     }
@@ -110,8 +117,10 @@ class Game {
     this.piranaArr.forEach((eachPirana) => {
       if (eachPirana.x > this.wanda.x) {
         eachPirana.directionX = -1;
+        eachPirana.image.src = "./images/pirana-left.png"
       } else if (eachPirana.x < this.wanda.x) {
         eachPirana.directionX = 1;
+        eachPirana.image.src = "./images/pirana-rigth.png"
       }
     });
   };
@@ -337,11 +346,11 @@ class Game {
     });
   };
 
-  /*maxScore = () => {
+  maxScore = () => {
     if (Number (scoreDOM.innerText) > Number (maxScoreNumberDOM.innerText)){
       maxScoreNumberDOM.innerText=scoreDOM.innerText
     }
-  }*/
+  }
 
   /*maxScore = () => {
     let currentScore = scoreDOM.innerText;
@@ -378,7 +387,7 @@ class Game {
     this.wandaEnemyCollision();
     this.wandaFoodCollision();
     this.wandaSpecialBoneCollision();
-    //this.maxScore();
+    this.maxScore();
 
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
