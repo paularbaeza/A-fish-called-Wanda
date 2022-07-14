@@ -84,27 +84,27 @@ soundOffBtonDOM.addEventListener("click", stopMusic);
 //adeventlistener para movimiento de Wanda
 window.addEventListener("keydown", (event) => {
   if (
-    event.code === "ArrowLeft" &&
+    (event.code === "ArrowLeft" || event.code ==="KeyA" )&&
     game.wanda.x >= 0 &&
     game.wanda.canMove === true
   ) {
     game.wanda.directionX = -1;
     game.wanda.image.src = "./images/wanda-happy-left.png";
   } else if (
-    event.code === "ArrowRight" &&
+    (event.code === "ArrowRight" || event.code === "KeyD")&&
     game.wanda.w < canvas.width &&
     game.wanda.canMove === true
   ) {
     game.wanda.directionX = 1;
     game.wanda.image.src = "./images/wanda-happy-right.png";
   } else if (
-    event.code === "ArrowUp" &&
+    (event.code === "ArrowUp" || event.code ==="KeyW" )&&
     game.wanda.y >= 0 &&
     game.wanda.canMove === true
   ) {
     game.wanda.directionY = -1;
   } else if (
-    event.code === "ArrowDown" &&
+    (event.code === "ArrowDown" || event.code === "KeyS" )&&
     game.wanda.y < canvas.height &&
     game.wanda.canMove === true
   ) {
