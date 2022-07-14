@@ -59,10 +59,16 @@ input[id^="instructions"] ~ .instructions {
   font-family: Rammetto One;
   background-color: rgba(2255, 255, 255, 0.5) ;
   border-radius: 10px;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 input[id^="instructions"] ~ .instructions p{
-  margin-top:0;
+  margin-top:0px;
+}
+input[id^="instructions"] ~ .instructions h4{
+  margin-bottom :8px;
+  margin-top:10px;
 }
 
 input[id^="instructions"]:checked + label + .instructions {
