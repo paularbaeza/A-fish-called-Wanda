@@ -223,7 +223,7 @@ class Game {
         }
         this.showFlash = true;
         this.wanda.faceSickWanda();
-        setTimeout(this.flashOut, 1000);
+        setTimeout(this.flashOut, 2000);
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText === "0") {
           this.gameOver();
@@ -258,7 +258,7 @@ class Game {
 
         this.showFlash = true;
         this.wanda.faceSickWanda();
-        setTimeout(this.flashOut, 1000);
+        setTimeout(this.flashOut, 2000);
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText === "0") {
           this.gameOver();
@@ -292,7 +292,7 @@ class Game {
         this.wanda.canMove = false;
         this.showFlash = true;
         this.wanda.faceSickWanda();
-        setTimeout(this.flashOut, 1000);
+        setTimeout(this.flashOut, 2000);
         setTimeout(this.wanda.afterWandaLoseLife, 2000);
         if (lifesDOM.innerText === "0") {
           this.gameOver();
