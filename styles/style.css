@@ -25,11 +25,11 @@ body {
 }
 
 /*oculta boton*/
-input[id^="instructions"] {
+#instructions {
   display: none;
 }
 
-input[id^="instructions"] + label {
+label {
   display: block;
   background-color: #e1a524;
   font-family: Rammetto One;
@@ -41,12 +41,12 @@ input[id^="instructions"] + label {
   border-color: white;
 }
 
-input[id^="instructions"]:checked + label {
+#instructions:checked + label {
   color: white;
   background: rgba(233, 217, 59, 0.5);
 }
 
-input[id^="instructions"] ~ .instructions {
+.instructions {
   display:flex;
   text-align: center;
   justify-content: center;
@@ -54,8 +54,7 @@ input[id^="instructions"] ~ .instructions {
   width: 75%;
   height: 0;
   overflow: hidden;
-  opacity: 100;
-  margin: 10px auto 0;
+  margin-top: 10px;
   font-family: Rammetto One;
   background-color: rgba(2255, 255, 255, 0.5) ;
   border-radius: 10px;
@@ -63,18 +62,17 @@ input[id^="instructions"] ~ .instructions {
   padding-right:10px;
 }
 
-input[id^="instructions"] ~ .instructions p{
+.instructions p{
   margin-top:0px;
 }
-input[id^="instructions"] ~ .instructions h4{
+.instructions h4{
   margin-bottom :8px;
   margin-top:10px;
 }
 
-input[id^="instructions"]:checked + label + .instructions {
+#instructions:checked + label + .instructions {
   height: auto;
   opacity: 1;
-  
 }
 
 #punctuation {
