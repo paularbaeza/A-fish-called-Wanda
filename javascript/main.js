@@ -28,7 +28,7 @@ const startGame = () => {
   gameOverDOM.style.display = "none";
   gameScreenDOM.style.display = "block";
   canvas.style.display = "block";
-  maxScoreDOM.style.display = "none"
+  maxScoreDOM.style.display = "flex"
   lifesDOM.innerText = 3;
   scoreDOM.innerText = 0;
   //...aquí empezaría el juego.

@@ -34,10 +34,6 @@ class Game {
     lifesBoxDOM.style.display = "none";
     maxScoreDOM.style.display = "flex";
     game.gameMusic.pause();
-
-    //guardar informacion del score en el local storage
-    //let maxScore = Number(maxScoreNumberDOM.innerText)
-    //let actualScore = Number (scoreDOM.innerText)
     
     this.maxScore();
 
@@ -354,12 +350,6 @@ class Game {
     }
   }
 
-  /*maxScore = () => {
-    let currentScore = scoreDOM.innerText;
-    if (Number(currentScore) > localStorage.getItem("highscore")) {
-      maxScoreNumberDOM.innerText = localStorage.getItem("highscore");
-    }
-  };*/
 
   gameLoop = () => {
     //1. limpiar el canvas
