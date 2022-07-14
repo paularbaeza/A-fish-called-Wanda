@@ -36,12 +36,14 @@ class Game {
     game.gameMusic.pause();
 
     //guardar informacion del score en el local storage
-    let maxScore = Number(maxScoreNumberDOM.innerText)
-    let actualScore = Number (scoreDOM.innerText)
+    //let maxScore = Number(maxScoreNumberDOM.innerText)
+    //let actualScore = Number (scoreDOM.innerText)
+    
+    this.maxScore();
 
-    localStorage.setItem("highscore", maxScore);
-    if (actualScore > localStorage.getItem("highscore")) {
-      local
+    localStorage.setItem("highscore", Number(maxScoreNumberDOM.innerText));
+    if (Number (scoreDOM.innerText) > localStorage.getItem("highscore")) {
+      localStorage.setItem("highscore", Number (scoreDOM.innerText))
     }
   };
 
@@ -387,7 +389,7 @@ class Game {
     this.wandaEnemyCollision();
     this.wandaFoodCollision();
     this.wandaSpecialBoneCollision();
-    this.maxScore();
+
 
     //3. dibujar los elementos
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);

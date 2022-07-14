@@ -16,7 +16,8 @@ const soundOffBtonDOM = document.querySelector("#soundOff-btn");
 const gameScreenDOM = document.querySelector("#game-screen");
 const maxScoreDOM = document.querySelector("#max-score")
 const maxScoreNumberDOM = document.querySelector("#max-score span")
-//const storage = window.localStorage
+let maxScore = Number(maxScoreNumberDOM.innerText)
+let actualScore = Number (scoreDOM.innerText)
 
 let game;
 
@@ -61,6 +62,7 @@ const stopMusic = () => {
   game.canPlaySound = false;
 };
 
+
 /*const compareScore = () => {
   const keyArr= []
   Object.keys(storage).forEach ((eachKey) => {
@@ -80,6 +82,8 @@ startBtnDOM.addEventListener("click", startGame);
 restartBtnDOM.addEventListener("click", reStartGame);
 soundOnBtnDOM.addEventListener("click", playMusic);
 soundOffBtonDOM.addEventListener("click", stopMusic);
+document.addEventListener('DOMContentLoaded', () => {
+  maxScoreNumberDOM.innerText = (localStorage.getItem("highscore"))})
 
 //adeventlistener para movimiento de Wanda
 window.addEventListener("keydown", (event) => {
