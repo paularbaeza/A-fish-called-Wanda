@@ -47,7 +47,7 @@ label {
 }
 
 .instructions {
-  display:flex;
+  display: flex;
   text-align: center;
   justify-content: center;
   flex-direction: column;
@@ -56,18 +56,18 @@ label {
   overflow: hidden;
   margin-top: 10px;
   font-family: Rammetto One;
-  background-color: rgba(2255, 255, 255, 0.5) ;
+  background-color: rgba(2255, 255, 255, 0.7);
   border-radius: 10px;
-  padding-left:10px;
-  padding-right:10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.instructions p{
-  margin-top:0px;
+.instructions p {
+  margin-top: 0px;
 }
-.instructions h4{
-  margin-bottom :8px;
-  margin-top:10px;
+.instructions h4 {
+  margin-bottom: 8px;
+  margin-top: 10px;
 }
 
 #instructions:checked + label + .instructions {

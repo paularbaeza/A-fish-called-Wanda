@@ -143,8 +143,8 @@ class Game {
         randomPositionXFood,
         randomPositionYFood,
         "./images/bone.png",
-        90,
-        45
+        75,
+        35
       );
       this.foodArr.push(food);
     }
@@ -158,8 +158,8 @@ class Game {
         randomPositionXSpecialBone,
         randomPositionYSpecialBone,
         "./images/special-bone.png",
-        85,
-        55
+        75,
+        35
       );
       this.specialBoneArr.push(specialBone);
       this.wanda.canGainLife = false;
