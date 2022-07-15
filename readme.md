@@ -1,8 +1,6 @@
 # NAME OF YOUR PROYECT
 
-
 ## [See the Game](https://paularbaeza.github.io/A-fish-called-Wanda/)
-
 
 # Description
 
@@ -12,80 +10,92 @@ A fish called Wanda is a game in which the player has to move a fish freely in t
 
 - The game has a fish as the main character.
 - The game has 4 different types of enemies (sharks, jellyfishes, dolphins and piranhas)
-- Each enemy collision with the player will take 1 life.
-- The enemies appear in different moments of the game, depending on the score. 
+- Each enemy collision with the player will take 1 life, will show a red flash screen, will stop Wanda movement and will change Wanda's face.
+- The enemies appear in different moments of the game, depending on the score.
 - The game has 2 different types of bones, the normal that grows the score, and the special that adds a life to the lifes counter.
 - The special bone appears every 20 seconds and can only be eaten during 5 seconds.
 - The max. score is stored and shown in future games.
 
-
-
 # Backlog Functionalities
 
-- Max. score with localStorage.
-
+- Add different game modes.
+- Add different player skins.
+- Add player control with the mouse.
 
 # Proyect Structure
 
 ## main.js
 
-- startGame()
-- playMusic()
+- startGame() {}
+- restartGame () {}
+- playMusic() {}
+- stopMusic () {}
 - DOM manipulation
 - addEventListeners
 
 ## game.js
-- Game () {}
-- startLoop () {}
-- clearCanvas (){}
-- drawCanvas (){}
-- gameOver (){}
-- addenemies (){}
-- checkEnemiesCollisions (){}
-- addBones (){}
-- checkBonesCollisions(){}
-- addSpecialBones (){}
-- checkSpecialBonesCollisions (){}
 
+- gameOver () {}
+- drawFlash () {}
+- flashOut () {}
+- addEnemy () {}
+- cleanEnemyArr () {}
+- addFood () {}
+- addSpecialBone () {}
+- wandaEnemyCollision () {}
+- wandaFoodCollision () {}
+- wandaSpecialBoneCollision () {}
+- maxScore () {}
+- gameLoop () {}
 
 ## wanda.js
 
 - Wanda () {
-    this.image;
-    this.x;
-    this.y;
-    this.w;
-    this.h;
-    this.speed;
-    this.direction;
-}
+  this.image;
+  this.x;
+  this.y;
+  this.w;
+  this.h;
+  this.speed;
+  this.directionX;
+  this.directionY;
+  this.canCollide;
+  this.canMove;
+  this.canGainLife;
+  }
 - drawWanda () {}
-- wandaMovement () {}
+- moveWanda () {}
+- faceSickWanda () {}
+- afterWandaLoseLife () {}
+- wandaCanvasCollision () {}
 
 ## food.js
 
 - Food () {
-    this.image;
-    this.x;
-    this.y;
-    this.w;
-    this.h;
-}
+  this.image;
+  this.x;
+  this.y;
+  this.w;
+  this.h;
+  }
 - drawFood () {}
 
 ## enemy.js
 
 - Enemy () {
-    this.image;
-    this.x;
-    this.y;
-    this.w;
-    this.h;
-    this.speed;
-    this.direction;
-}
+  this.image;
+  this.x;
+  this.y;
+  this.w;
+  this.h;
+  this.speed;
+  this.directionX;
+  this.directionY;
+  }
 - drawEnemy () {}
 - enemyMovement () {}
+- medusaMovement () {}
+- piranaMovement () {}
 
 # States and Transitions
 
@@ -93,5 +103,6 @@ A fish called Wanda is a game in which the player has to move a fish freely in t
 - Game Screen
 - Game Over Screen
 
+### Slides 
 
-### Slides
+(https://slides.com/d/venM9kY/live)
